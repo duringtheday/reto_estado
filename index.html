@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="./styles.css">
+    <link rel="icon" href="./images/palanca-de-mando.png" type="image/png">
+    <script crossorigin src="https://unpkg.com/react@18.3.1/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <title>Reto: Estado</title>
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+        // Reusable Contador Component for handling product quantity
+        const Contador = (props) => {
+            const [cantidad, setCantidad] = React.useState(0); // State for product count
+
+            const aumentarCantidad = () => setCantidad(cantidad + 1);
+            const disminuirCantidad = () => {
+                if (cantidad > 0) setCantidad(cantidad - 1);
+            };
+
+            // Set specific styles for the image based on props
+            const imageStyle = {
+                width: props.width ? props.width : '250px', // Default to 100px if not specified
+                height: props.height ? props.height : '165px', // Default height to auto
+            };
+
+            return (
+                <div className="tarjeta-articulo">
+                    <img src={props.imagen} alt={props.alt} style={imageStyle} />
+                    <div className="contenido">
+                        <h3>{props.titulo}</h3>
+                        <p>{props.descripcion}</p>
+                        <div className="counter">
+                            <button onClick={disminuirCantidad}>-</button>
+                            <span>{cantidad}</span>
+                            <button onClick={aumentarCantidad}>+</button>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        // Main component with product listings
+        const Comprar = () => {
+            return (
+                <div id="container">
+                    {/* consolas antiguas */}
+                    <div id="cons-ant">
+                        <h1>Mi Consola Coleccionable</h1>
+                        <div id="container-img-c-a">
+                            <Contador
+                                imagen="./images/atari_1.png"
+                                alt="Atari"
+                                titulo="Atari"
+                                descripcion="Una consola clásica de los años 80."
+                            />
+                            <Contador
+                                imagen="./images/nintendo_0.png"
+                                alt="Nintendo"
+                                titulo="Nintendo"
+                                descripcion="El famoso Nintendo de 8 bits."
+                            />
+                            <Contador
+                                imagen="./images/sega_genesis.jpg"
+                                alt="Sega Genesis"
+                                titulo="Sega Genesis"
+                                descripcion="Una consola icónica de Sega."
+                            />
+                            <Contador
+                                imagen="./images/super_nintendo.jpeg"
+                                alt="Super Nintendo"
+                                titulo="Super Nintendo"
+                                descripcion="El sucesor del Nintendo original."
+                            />
+                            <Contador
+                                imagen="./images/playstation_1.png"
+                                alt="PlayStation"
+                                titulo="PlayStation"
+                                descripcion="La primera PlayStation revolucionaria."
+                            />
+                        </div>
+                    </div>
+
+                    {/* consolas nuevas */}
+                    <div id="cons-nuev">
+                        <h1>Mi Nueva Consola</h1>
+                        <div id="container-img-nuev">
+                            <Contador
+                                imagen="./images/playstation5_ps5.jpg"
+                                alt="PlayStation 5"
+                                titulo="PlayStation 5"
+                                descripcion="La consola de nueva generación."
+                            />
+                            <Contador
+                                imagen="./images/x-box-series-x.png"
+                                alt="Xbox Series X"
+                                titulo="Xbox Series X"
+                                descripcion="La más potente consola de Microsoft."
+                            />
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        // `new` and `modern`
+        ReactDOM.createRoot(document.getElementById('root')).render(<Comprar />);
+
+
+        // another `new` and `modern`
+        // const root = ReactDOM.createRoot(document.getElementById('root'));
+        // root.render(<Comprar />);
+
+    </script>
+</body>
+
+</html>
